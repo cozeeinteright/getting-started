@@ -1,14 +1,45 @@
 function App() {
-    const { Container, Row, Col } = ReactBootstrap;
+    const { Container, Row, Col, Button } = ReactBootstrap;
     return (
         <Container>
             <Row>
-                <Col md={{ offset: 3, span: 6 }}>
+                <Col lg={{ offset: 3, span: 6 }}>
                     <TodoListCard />
                 </Col>
             </Row>
+            <Button onClick={() => console.log("Button Clicked")}variant="primary" href="">
+                Button
+            </Button>
+            <AlertDismissible></AlertDismissible>
         </Container>
     );
+}
+
+function AlertDismissible() {
+    const { Alert, Button } = ReactBootstrap;
+    const [show, setShow] = React.useState(true);
+
+    return (
+        <React.Fragment>
+            <Alert show={show} variant="primary">
+                <Alert.Heading>詳細</Alert.Heading>
+                <p>
+                    ここではこの商品に関する詳細を紹介しています。
+                </p>
+                <p>
+                    もっと知りたい商品情報
+                </p>
+                <hr />
+                <div className="d-flex justify-content-end">
+                    <Button onClick={ () => setShow(false)} variant="outline-success">
+                        詳細を閉じる
+                    </Button>
+                </div>
+            </Alert>
+
+            {!show && <Button onClick={() => setShow(true)}>詳細を表示</Button>}
+        </React.Fragment>
+    )
 }
 
 function TodoListCard() {
@@ -102,11 +133,11 @@ function AddItemForm({ onNewItem }) {
                 <InputGroup.Append>
                     <Button
                         type="submit"
-                        variant="success"
+                        variant="dark"
                         disabled={!newItem.length}
                         className={submitting ? 'disabled' : ''}
                     >
-                        {submitting ? 'Adding...' : 'Add Item'}
+                        {submitting ? 'Adding...' : 'Add Toby'}
                     </Button>
                 </InputGroup.Append>
             </InputGroup>
@@ -159,7 +190,7 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                     </Button>
                 </Col>
                 <Col xs={10} className="name">
-                    {item.name}
+                    {item.name + 'Toby'} 
                 </Col>
                 <Col xs={1} className="text-center remove">
                     <Button
