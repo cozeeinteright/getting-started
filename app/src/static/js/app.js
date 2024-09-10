@@ -1,5 +1,6 @@
 function App() {
     const { Container, Row, Col, Button } = ReactBootstrap;
+    const [userName, setUserName] = React.useState("no-name");
     return (
         <Container>
             <Row>
@@ -7,9 +8,10 @@ function App() {
                     <TodoListCard />
                 </Col>
             </Row>
-            <Button onClick={() => console.log("Button Clicked")}variant="primary" href="">
+            <Button onClick={() => fetch("http://localhost:3000/user").then((res) => res.json()).then((user) => setUserName(user.name)).catch((err) => console.log("error")) } variant="primary" href="">
                 Button
             </Button>
+            <div>user name is {userName}</div>
             <AlertDismissible></AlertDismissible>
         </Container>
     );

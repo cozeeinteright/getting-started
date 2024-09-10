@@ -2,6 +2,12 @@ const express = require('express');
 const app = express();
 const db = require('./persistence');
 
+const user = {
+    id:1,
+    name: "koji",
+    age: 43,
+};
+
 const circle = require('./circle.js');
 
 const port = 3000;
@@ -23,6 +29,10 @@ app.get('/items', getItems);
 app.post('/items', addItem);
 app.put('/items/:id', updateItem);
 app.delete('/items/:id', deleteItem);
+
+app.get('/user', (req, res) => {
+    res.json(user);
+} );
 
 app.get('/about', (req, res) => {
     res.send('About my page ')
